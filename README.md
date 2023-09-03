@@ -6,6 +6,7 @@ Blockchain Homework 2 Template for Students.
 2. [Tasks](#tasks)
 3. [Environment Setup](#environment%20setup)
 4. [Help and Tips](#help%20and%20tips)
+5. [Contribution](#contribution)
 
 ---
 # Introduction
@@ -191,3 +192,7 @@ const getNumber = async () => {
 ```
 
 You must use `useEffect` and `setState` to dynamically update acquired values.
+
+---
+# Contribution
+If you see any errors in descriptions or need more details, please open an Issue Ticket.
