@@ -168,14 +168,14 @@ import { Counter__factory } from './generated/contract-types';
 
 ```tsx
 const handleConnectWallet = async () => {
-	// ethers.BrowserProvider is a provider for state changes. It will trigger MetaMask
-	const myProvider = new ethers.BrowserProvider(window.ethereum)
-	setProvider(myProvider) // You must define the setProvider function just like HW1
-    if (provider) { // TypeScript is strict with types and you must check for `undefined` variables
-      await provider.send('eth_requestAccounts', [])
-      const signer = await provider.getSigner()
-      setAddress(await signer.getAddress())
-	}
+  // ethers.BrowserProvider is a provider for state changes. It will trigger MetaMask
+  const myProvider = new ethers.BrowserProvider(window.ethereum)
+  setProvider(myProvider) // You must define the setProvider function just like HW1
+  if (provider) { // TypeScript is strict with types and you must check for `undefined` variables
+    await provider.send('eth_requestAccounts', [])
+    const signer = await provider.getSigner()
+    setAddress(await signer.getAddress())
+  }
 }
 ```
 
@@ -183,11 +183,11 @@ const handleConnectWallet = async () => {
 
 ```tsx
 const getNumber = async () => {
-	// ethers.JsonRpcProvider is for non-state changing operations. It will NOT trigger MetaMask. This uses the TypeChain output.
-    const provider = new ethers.JsonRpcProvider()
-    const counter = Counter__factory.connect('<contract_address_here>', provider)
-    const n = await counter.number()
-	console.log(ethers.formatUnits(n)) // Or other operations
+  // ethers.JsonRpcProvider is for non-state changing operations. It will NOT trigger MetaMask. This uses the TypeChain output.
+  const provider = new ethers.JsonRpcProvider()
+  const counter = Counter__factory.connect('<contract_address_here>', provider)
+  const n = await counter.number()
+  console.log(ethers.formatUnits(n)) // Or other operations
 }
 ```
 
