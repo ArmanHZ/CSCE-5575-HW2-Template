@@ -179,7 +179,7 @@ const handleConnectWallet = async () => {
 }
 ```
 
-### Accessing Public Value Example
+### Accessing Public Variable Example
 
 ```tsx
 const getNumber = async () => {
