@@ -2,7 +2,7 @@
 
 function doesExist() {
 	if ! command -v $1 > /dev/null; then
-		echo "$1 is not installed. Please install it before continueing."
+		printf "\e[31;1m $1 is not installed. Please install it before continuing.\n\n\e[0m"
 		exit 1
 	fi
 }
@@ -14,7 +14,7 @@ doesExist cast
 doesExist node
 doesExist pnpm
 
-printf "All the necessary tools are installed.\n\n"
+printf "\e[32m All the necessary tools are installed.\n\n\e[0m "
 
 mkdir -p chain-end
 cd chain-end
@@ -22,5 +22,5 @@ forge init . --no-commit
 cd ../front-end
 pnpm install
 
-printf "\npnpm start to start the react server.\nRun the helper functions from the 'front-end' directory.\nFor a list of the helper functions, check out the GitHub repository.\n\n"
+printf "\n\e[32m pnpm start to start the react server.\n Run the helper functions from the 'front-end' directory.\n For a list of the helper functions, check out the GitHub repository.\n\n\e[0m"
 

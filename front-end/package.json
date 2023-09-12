@@ -23,7 +23,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build": "cd ../chain-end && forge build",
+    "deploy-contract": "cd ../chain-end && forge create --rpc-url http://127.0.0.1:8545 --legacy",
+    "call": "cast call --rpc-url http://127.0.0.1:8545 --legacy",
+    "send": "cast send --rpc-url http://127.0.0.1:8545 --legacy"
   },
   "eslintConfig": {
     "extends": [
