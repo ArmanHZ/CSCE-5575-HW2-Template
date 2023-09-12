@@ -14,6 +14,7 @@ doesExist cast
 doesExist node
 doesExist pnpm
 
+mkdir -p chain-end
 cd chain-end
 forge init . --no-commit
 cd ../front-end
