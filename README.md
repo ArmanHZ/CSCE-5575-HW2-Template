@@ -4,8 +4,8 @@ Blockchain Homework 2 Template for Students.
 # Table of Contents
 1. [Introduction](#introduction)
 2. [Tasks](#tasks)
-3. [Environment Setup](#environment%20setup)
-4. [Help and Tips](#help%20and%20tips)
+3. [Environment Setup](#environment-setup)
+4. [Help and Tips](#help-and-tips)
 5. [Contribution](#contribution)
 
 ---
@@ -53,6 +53,7 @@ The front-end ***MUST*** have the following features:
 - A button to call `getNum` from the smart contract
 - A text field and a button to `setNum`. This will also invoke `MetaMask` and the user must pay the fee to call the function
 - After the connection, the "lorem, ipsum" array must be also acquired and displayed according to the `num` value (same as HW1)
+	- The cut/slice happens in smart contract. So, you will get and display the sliced array from the contract call.  
 - After each payment, the wallet balance and `num` value must be automatically updated
 
 The front-end GUI components and styling can be anything you like. No restrictions there.
@@ -60,58 +61,46 @@ The front-end GUI components and styling can be anything you like. No restrictio
 Keep in mind that when accessing the variables, e.g. calling `get` functions from the smart contract, the user does not pay anything. The user only pays, when the state of the smart contract is changed. Such as calling the `setNumber` function.
 
 ---
-# Environment Setup
+# Environment-Setup
 ***Note: There are a lot of tools to setup with sometimes a rather long installation/compilation time. Not to mention the learning curve.***
+
+We have included a setup script `setup.sh` to make it easier to setup the project and start working on it.
+To use the script:
+
+```bash
+# In an empty directory.
+git clone https://github.com/ArmanHZ/CSCE-5575-Project-1-Template.git
+cd CSCE-5575-Project-1-Template
+chmod u+x setup.sh
+./setup.sh
+```
+
+If you have missing tools, install them using `apt` or any other method.
+
+After everything finishes successfully, navigate to `front-end` directory and start `react` by running `pnpm start`.
 
 ### Ganache
 Download link: https://trufflesuite.com/ganache/
 Executable download and run.
 The setup options are the same as in the guide: https://iiiyu.com/2022/10/24/zero-to-one-full-stack-dapp-ethereum-development-based-on-foundry-nextjs-typescript-latest-version/#Setting-up-the-local-chain-for-development
 
-### Foundry
-Foundry is written in `Rust`. So, you need to install `rustup` first. (https://rustup.rs/)
-After installing `rustup`, follow this guide (https://book.getfoundry.sh/getting-started/installation) and install `Foundry`.
-
-### ReactJS
-You should know this from the first homework. In your `front-end` directory (explained later), install the `TypeChain` and `Ethers` libraries using `pnpm`.
-
-### MetaMask
-It is a browser plugin. If you are using FireFox: https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/
-To import your test account, follow the Ganache guide.
-
-### Project files
-You will have two main directories, one is for the smart contract `chain_end`, the other is for the front-end `front_end`.
-So,
-
-```bash
-mkdir HW_2 # Create your HW folder
-cd HW_2
-mkdir chain_end
-mkdir front_end
-```
-
-Inside the `chain_end`, run:
-
-```bash
-forge init .
-```
-
-In the `src`, you will see the `Counter.sol`. This is the smart contract file you are going to work with.
-
-In the `front_end` directory, run:
-
-```bash
-cd front_end
-pnpm create react-app . --template typescript
-# Install the required libraries
-pnpm install ethers
-pnpm install typechain @typechain/ethers-v6
-# Start the server
-pnpm start
-```
-
 ---
-# Help and Tips
+# Help-and-Tips
+### Helper Functions
+You can call the helper functions from the `front-end` directory using `pnpm`.
+The list is as follows:
+
+```bash
+pnpm build				# Builds the contract in chain-end/src
+pnpm deploy-contract <private_key>	# Deploys your smart contract to Ganache
+pnpm call <contract_id>			# Access read-only variables of the contract
+pnpm send <contract_id> <private_key>	# Call contract functions. These are state changing, so you will pay eth.
+```
+
+For other functionalities, you can use `foundry` tools from the `chain-end` directory.
+***Important: After every change to your smart contract, you must re-deploy it. Re-deployed contracts will have a new address.***
+
+### Documentation
 Links:
 - Must read: https://iiiyu.com/2022/10/24/zero-to-one-full-stack-dapp-ethereum-development-based-on-foundry-nextjs-typescript-latest-version
 - Deploying Smart Contracts using Foundry `forge`: https://book.getfoundry.sh/forge/deploying
@@ -125,27 +114,6 @@ Taken from https://docs.ethers.org/v6/getting-started/#starting-glossary
 - Signer: wraps all operations that interact with an account. An account generally has a private key located somewhere, which can be used to sign a variety of types of payloads.
   The private key may be located in memory (using a Wallet) or protected via some IPC layer, such as MetaMask which proxies interaction from a website to a browser plug-in, which keeps the private key out of the reach of the website and only permits interaction after requesting permission from the user and receiving authorization.
 
-### Tips for Smart Contract:
-After editing the solidity file, instead of deploying it and trying to access the functions and variables from the front-end, just use `forge`. If you try to do it from the front-end, there may be errors in your contract and/or in your front-end. So, no need to waste time on that.
-An example of accessing a function and a public value using `foundry forge`:
-```bash
-# Inside chain_end directory
-# Deploy the contract
-forge create --rpc-url http://127.0.0.1:8545 --private-key <test_account_private_key> src/Counter.sol:Counter --legacy
-# You will see some output and also the transaction data on Ganache interface.
-
-# Accessing number variable
-cast call <contract_address> "num()" --rpc-url http://127.0.0.1:8545
-# Contract address can be seen both from Ganache or as the output of the `forge create` command
-# Note that we didn't need the private key, since we are not changing the state of the smart contract
-
-# Calling a function / changing the state
-cast send <contract_address> "increment()" --rpc-url http://127.0.0.1:8545 --private-key <test_account_private_key> --legacy
-```
-
-To get the test account private key, read the Ganache part of the provided guide. Everything you need can be obtained through the `Ganache` UI
-
-***Important: After every change to your smart contract, you must re-deploy it. Re-deployed contracts will have a new address.***
 ### Example code for connecting to MetaMask
 The guide uses `Ethers v5` and the latest version is `v6`. Unfortunately, there were some major changes, so you will not be able to use the guide.
 Here are some example codes to interact with the wallet and public values, as well as give you some idea on how to use `Ethers v6`.
@@ -164,7 +132,7 @@ After creating the ABI bindings, make sure to import that in your `App.tsx` as w
 import { Counter__factory } from './generated/contract-types';
 ```
 
-### Wallet Connection Example
+### Wallet-Connection-Example
 
 ```tsx
 const handleConnectWallet = async () => {
