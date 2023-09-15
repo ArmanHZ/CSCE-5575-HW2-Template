@@ -1,5 +1,4 @@
-# CSCE-5575-HW2-Template
-Blockchain Homework 2 Template for Students.
+# CSCE-5575-HW2-Template - Instructor: Beddhu Murali
 
 # Table of Contents
 1. [Introduction](#introduction)
