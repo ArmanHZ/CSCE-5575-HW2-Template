@@ -1,11 +1,13 @@
 #!/bin/bash
 
-function doesExist() {
-	if ! command -v $1 > /dev/null; then
+if ! command -v $1 > /dev/null; then
+	if [[ $1 == 'forge' || $1 == 'cast' ]]; then
+		printf "\e[31;1m Foundry is not installed.\n Check https://book.getfoundry.sh/getting-started/installation for installation steps.\n\n\e[0m"
+	else
 		printf "\e[31;1m $1 is not installed. Please install it before continuing.\n\n\e[0m"
-		exit 1
 	fi
-}
+		exit 1
+fi
 
 doesExist curl
 doesExist git
