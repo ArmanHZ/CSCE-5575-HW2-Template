@@ -122,7 +122,7 @@ After you deploy your contract, make sure to create the `TypeScript code from AB
 
 ```bash
 # In the front-end/src directory
-pnpm typechain --target ethers-v6 --out-dir generated/contract-types '../../chain_end/out/Counter.sol/Counter.json'
+pnpm typechain --target ethers-v6 --out-dir generated/contract-types '../../chain-end/out/Counter.sol/Counter.json'
 ```
 
 After creating the ABI bindings, make sure to import that in your `App.tsx` as well:
