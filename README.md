@@ -90,10 +90,10 @@ You can call the helper functions from the `front-end` directory using `pnpm`.
 The list is as follows:
 
 ```bash
-pnpm build				# Builds the contract in chain-end/src
-pnpm deploy-contract <private_key>	# Deploys your smart contract to Ganache
-pnpm call <contract_id>			# Access read-only variables of the contract
-pnpm send <contract_id> <private_key>	# Call contract functions. These are state changing, so you will pay eth.
+pnpm build												# Builds the contract in chain-end/src
+pnpm deploy-contract --private-key <private_key>		# Deploys your smart contract to Ganache
+pnpm call <contract_id>									# Access read-only variables of the contract
+pnpm send <contract_id> --private-key <private_key>		# Call contract functions. These are state changing, so you will pay eth.
 ```
 
 For other functionalities, you can use `foundry` tools from the `chain-end` directory.
