@@ -1,4 +1,4 @@
-# CSCE-5575-HW2-Template <br /> Instructor: Beddhu Murali
+# CSCE-5575-Project-1-Template <br /> Instructor: Beddhu Murali
 
 # Table of Contents
 1. [Introduction](#introduction)
