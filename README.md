@@ -126,6 +126,7 @@ pnpm typechain --target ethers-v6 --out-dir generated/contract-types '../../chai
 # If the above fails, try
 pnpm typechain --target ethers-v6 --out-dir generated/contract-types '$(pwd)/../../chain-end/out/Counter.sol/Counter.json'
 ```
+***NOTE: If the "generated/contract-types" is outside of "src", move it "src". Or else, you will encounter problems.***
 
 After creating the ABI bindings, make sure to import that in your `App.tsx` as well:
 
@@ -157,6 +158,41 @@ const getNumber = async () => {
   const counter = Counter__factory.connect('<contract_address_here>', provider)
   const n = await counter.number()
   console.log(ethers.formatUnits(n)) // Or other operations
+}
+```
+
+### Changing Contract State Example
+
+```tsx
+const handleIncrement = async () => {
+    console.log('increment')
+    if (provider) {
+      const signer = await provider.getSigner()
+      const counter = Counter__factory.connect('0x922F7d98A557963839a286e0E8028370E9060Bfe', signer)
+      await counter.increment()
+    }
+  }
+```
+
+### Dealing With String Arrays Example
+
+```solidity
+// Chain-end
+string[] my_array = ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "sed", "do"];
+
+function getArray() public view returns(string[] memory) {
+	return my_array;
+}
+```
+
+```tsx
+// Front-end
+const getArray = async () => {
+	const provider = new ethers.JsonRpcProvider()
+	const counter = Counter__factory.connect('0x8b95f49A1968fcb5786beCA51eCF252f66D05237', provider)
+	const arr = await counter.getArray()
+	console.log(arr) // Entire array
+	console.log(arr[0]) // First element of array
 }
 ```
 
