@@ -168,7 +168,7 @@ const handleIncrement = async () => {
     console.log('increment')
     if (provider) {
       const signer = await provider.getSigner()
-      const counter = Counter__factory.connect('0x922F7d98A557963839a286e0E8028370E9060Bfe', signer)
+      const counter = Counter__factory.connect('<contract_address_here>', signer)
       await counter.increment()
     }
   }
@@ -181,18 +181,18 @@ const handleIncrement = async () => {
 string[] my_array = ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "sed", "do"];
 
 function getArray() public view returns(string[] memory) {
-	return my_array;
+    return my_array;
 }
 ```
 
 ```tsx
 // Front-end
 const getArray = async () => {
-	const provider = new ethers.JsonRpcProvider()
-	const counter = Counter__factory.connect('0x8b95f49A1968fcb5786beCA51eCF252f66D05237', provider)
-	const arr = await counter.getArray()
-	console.log(arr) // Entire array
-	console.log(arr[0]) // First element of array
+  const provider = new ethers.JsonRpcProvider()
+  const counter = Counter__factory.connect('<contract_address_here>', provider)
+  const arr = await counter.getArray()
+  console.log(arr) // Entire array
+  console.log(arr[0]) // First element of array
 }
 ```
 
